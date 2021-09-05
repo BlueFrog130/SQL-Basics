@@ -48,18 +48,27 @@ LOAD DATA INFILE 'C:/Users/<USER>/Downloads/data.csv'
     SET `first`=@`first`, middle=@middle, `last`=@`last`, gender=@gender, state=@state, birthday=@birthday;
 ```
 
+Altering the table
+```SQL
+USE tutorial;
+
+ALTER TABLE People ADD COLUMN FullName TEXT GENERATED ALWAYS AS (CONCAT(`first`, ' ', `last`));
+```
+
 Some more `SELECT` statements
 ```SQL
 USE tutorial;
 
+# Counts everything from the people table
 SELECT COUNT(*) FROM People;
 
-ALTER TABLE People ADD COLUMN FullName TEXT GENERATED ALWAYS AS (CONCAT(`first`, ' ', `last`));
-
+# Gets people's id, first name, and state where their state is from SD. Then limits to top 100 results.
 SELECT id, `first`, state FROM people WHERE state = 'SD' LIMIT 100;
 
+# Selects a persons full name and age
 SELECT FullName, TIMESTAMPDIFF(YEAR, birthday, CURDATE()) AS Age FROM People LIMIT 100;
 
+# Groups people by gender, then computes the average age and counts them
 SELECT
     gender AS Gender,
     AVG(TIMESTAMPDIFF(YEAR, birthday, CURDATE())) AS AvgAge,
