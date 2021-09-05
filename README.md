@@ -7,7 +7,7 @@ Creating the table
 USE tutorial;
 
 CREATE TABLE People (
-	id INT NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     `first` VARCHAR(100) NOT NULL,
     middle CHAR(1) NOT NULL,
     `last` VARCHAR(100) NOT NULL,
@@ -38,7 +38,7 @@ Inserting from a csv
 USE tutorial;
 
 LOAD DATA INFILE 'C:/Users/<USER>/Downloads/data.csv'
-	INTO TABLE People
+    INTO TABLE People
     FIELDS TERMINATED BY ','
     LINES TERMINATED BY '\n'
     IGNORE 1 ROWS
@@ -59,7 +59,7 @@ SELECT id, `first`, state FROM people WHERE state = 'SD' LIMIT 100;
 SELECT FullName, TIMESTAMPDIFF(YEAR, birthday, CURDATE()) AS Age FROM People LIMIT 100;
 
 SELECT
-	gender AS Gender,
+    gender AS Gender,
     AVG(TIMESTAMPDIFF(YEAR, birthday, CURDATE())) AS AvgAge,
     COUNT(*) AS Amount
 FROM People GROUP BY gender;
