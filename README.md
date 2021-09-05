@@ -2,6 +2,8 @@
 
 Showing basic SQL commands and how to query & filter data.
 
+[Download the people data](https://github.com/BlueFrog130/SQL-Basics/raw/main/data.csv)
+
 Creating the table
 ```SQL
 USE tutorial;
