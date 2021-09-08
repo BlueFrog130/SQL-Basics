@@ -13,7 +13,7 @@ CREATE TABLE People (
     `first` VARCHAR(100) NOT NULL,
     middle CHAR(1) NOT NULL,
     `last` VARCHAR(100) NOT NULL,
-    gender VARCHAR(6) NOT NULL,
+    sex VARCHAR(6) NOT NULL,
     state CHAR(2) NOT NULL,
     birthday DATETIME NOT NULL,
     PRIMARY KEY ( id )
@@ -31,7 +31,7 @@ Inserting a single value
 ```SQL
 USE tutorial;
 
-INSERT INTO people (`first`, middle, `last`, gender, state, birthday) VALUES 
+INSERT INTO people (`first`, middle, `last`, sex, state, birthday) VALUES 
 ('Adam', 'l', 'Grady', 'male', 'SD', '1998-08-14');
 ```
 
@@ -44,8 +44,8 @@ LOAD DATA INFILE 'C:/Users/<USER>/Downloads/data.csv'
     FIELDS TERMINATED BY ','
     LINES TERMINATED BY '\n'
     IGNORE 1 ROWS
-    (@`first`, @middle, @`last`, @gender, @state, @birthday)
-    SET `first`=@`first`, middle=@middle, `last`=@`last`, gender=@gender, state=@state, birthday=@birthday;
+    (@`first`, @middle, @`last`, @sex, @state, @birthday)
+    SET `first`=@`first`, middle=@middle, `last`=@`last`, sex=@sex, state=@state, birthday=@birthday;
 ```
 
 Altering the table
@@ -68,10 +68,10 @@ SELECT id, `first`, state FROM people WHERE state = 'SD' LIMIT 100;
 # Selects a persons full name and age
 SELECT FullName, TIMESTAMPDIFF(YEAR, birthday, CURDATE()) AS Age FROM People LIMIT 100;
 
-# Groups people by gender, then computes the average age and counts them
+# Groups people by sex, then computes the average age and counts them
 SELECT
-    gender AS Gender,
+    sex AS Sex,
     AVG(TIMESTAMPDIFF(YEAR, birthday, CURDATE())) AS AvgAge,
     COUNT(*) AS Amount
-FROM People GROUP BY gender;
+FROM People GROUP BY sex;
 ```
